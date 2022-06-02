@@ -1,17 +1,20 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
 class PdfMerge {
   static const MethodChannel _channel = const MethodChannel('pdf_merge');
 
-  static Future<String> PdfMerger(List<String> paths) async {
+  static Future<String> mergePDF(
+      {required List<String> paths, required String outputDirPath}) async {
     // Mapping the path to <key, value>
 
-    final String pdfText = await _channel
-        .invokeMethod('PdfMerger', <String, dynamic>{'paths': paths.join(";")});
-    return pdfText;
-  }
+    final Map<String, dynamic> params = <String, dynamic>{
+      'paths': paths,
+      'outputDirPath': outputDirPath
+    };
 
+    final String pdfPath = await _channel.invokeMethod('PdfMerger', params);
+    return pdfPath;
+  }
 }

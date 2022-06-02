@@ -5,10 +5,10 @@ import ImageIO
 import AVFoundation
 
 
-public class SwiftPdfMergerPlugin: NSObject, FlutterPlugin {
+public class SwiftPdfMergePlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "pdf_merger", binaryMessenger: registrar.messenger())
-    let instance = SwiftPdfMergerPlugin()
+    let instance = SwiftPdfMergePlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 
@@ -17,7 +17,7 @@ public class SwiftPdfMergerPlugin: NSObject, FlutterPlugin {
        if let args = call.arguments as? Dictionary<String, Any>{
         
         DispatchQueue.global().async {
-            let singlePDFFromMultiplePDF =  SwiftPdfMergerPlugin.mergeMultiplePDF(args : args)
+            let singlePDFFromMultiplePDF =  SwiftPdfMergePlugin.mergeMultiplePDF(args : args)
             DispatchQueue.main.sync {
                 result(singlePDFFromMultiplePDF)
             }
@@ -29,7 +29,7 @@ public class SwiftPdfMergerPlugin: NSObject, FlutterPlugin {
                      if let args = call.arguments as? Dictionary<String, Any>{
 
                         DispatchQueue.global().async {
-                            let pdfFromMultipleImage = SwiftPdfMergerPlugin.createPDFFromMultipleImage(args : args)
+                            let pdfFromMultipleImage = SwiftPdfMergePlugin.createPDFFromMultipleImage(args : args)
                             DispatchQueue.main.sync {
                                result(pdfFromMultipleImage)
                             }
@@ -41,7 +41,7 @@ public class SwiftPdfMergerPlugin: NSObject, FlutterPlugin {
                             if let args = call.arguments as? Dictionary<String, Any>{
 
                                DispatchQueue.global().async {
-                                   let imageFromPDF = SwiftPdfMergerPlugin.createImageFromPDF(args : args)
+                                   let imageFromPDF = SwiftPdfMergePlugin.createImageFromPDF(args : args)
                                    DispatchQueue.main.sync {
                                       result(imageFromPDF)
                                    }
@@ -53,7 +53,7 @@ public class SwiftPdfMergerPlugin: NSObject, FlutterPlugin {
         if let args = call.arguments as? Dictionary<String, Any>{
 
            DispatchQueue.global().async {
-               let sizeForFilePath = SwiftPdfMergerPlugin.sizeForLocalFilePath(args : args)
+               let sizeForFilePath = SwiftPdfMergePlugin.sizeForLocalFilePath(args : args)
                DispatchQueue.main.sync {
                   result(sizeForFilePath)
                }
@@ -63,27 +63,27 @@ public class SwiftPdfMergerPlugin: NSObject, FlutterPlugin {
           }
 }else if call.method == "buildDate" {
 
-           let buildDateResponse = SwiftPdfMergerPlugin.buildDate()
+           let buildDateResponse = SwiftPdfMergePlugin.buildDate()
            result(buildDateResponse)
 }else if call.method == "buildDateWithTime" {
     
-    let buildDateWithTimeResponse = SwiftPdfMergerPlugin.buildDateWithTime()
+    let buildDateWithTimeResponse = SwiftPdfMergePlugin.buildDateWithTime()
     result(buildDateWithTimeResponse)
 }else if call.method == "versionName" {
     
-    let versionNameResponse = SwiftPdfMergerPlugin.versionName()
+    let versionNameResponse = SwiftPdfMergePlugin.versionName()
     result(versionNameResponse)
 }else if call.method == "versionCode" {
     
-    let versionCodeResponse = SwiftPdfMergerPlugin.versionCode()
+    let versionCodeResponse = SwiftPdfMergePlugin.versionCode()
     result(versionCodeResponse)
 }else if call.method == "packageName" {
     
-    let packageNameResponse = SwiftPdfMergerPlugin.packageName()
+    let packageNameResponse = SwiftPdfMergePlugin.packageName()
     result(packageNameResponse)
 }else if call.method == "appName" {
     
-    let appNameResponse = SwiftPdfMergerPlugin.appName()
+    let appNameResponse = SwiftPdfMergePlugin.appName()
     result(appNameResponse)
 } else{
             result("Not Implemented")

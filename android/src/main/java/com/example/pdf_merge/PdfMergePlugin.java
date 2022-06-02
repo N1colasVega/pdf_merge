@@ -69,6 +69,7 @@ public class PdfMergePlugin implements FlutterPlugin, MethodCallHandler {
         if (call.method.equals("PdfMerger")) {
             error = false;
             final String paths = call.argument("paths");
+            final String outputDirPath = call.argument("outputDirPath");
             String[] paths_array = paths.split(";");
 
             PDFMergerUtility ut = new PDFMergerUtility();
@@ -82,9 +83,7 @@ public class PdfMergePlugin implements FlutterPlugin, MethodCallHandler {
                 }
             }
 
-            String mainPath = paths_array[0] + "_main.pdf";
-            final File file = new File(mainPath);
-
+            final File file = new File(outputDirPath);
 
             try {
                 final FileOutputStream fileOutputStream = new FileOutputStream(file);

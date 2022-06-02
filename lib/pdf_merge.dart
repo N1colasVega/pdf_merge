@@ -17,6 +17,7 @@ class PdfMerge {
       final String pdfPath = await _channel.invokeMethod('PdfMerger', params);
       return pdfPath;
     } catch (e) {
+      print(e.toString());
       return null;
     }
   }

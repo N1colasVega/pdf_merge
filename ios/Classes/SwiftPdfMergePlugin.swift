@@ -7,17 +7,14 @@ import AVFoundation
 
 public class SwiftPdfMergePlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "pdf_merger", binaryMessenger: registrar.messenger())
+    let channel = FlutterMethodChannel(name: "pdf_merge", binaryMessenger: registrar.messenger())
     let instance = SwiftPdfMergePlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-       print("INVOKE")
      if call.method == "PdfMerger" {
-       print("INDSIDE")
        if let args = call.arguments as? Dictionary<String, Any>{
-         print("INDSIDE2")
         DispatchQueue.global().async {
             let singlePDFFromMultiplePDF =  SwiftPdfMergePlugin.mergeMultiplePDF(args : args)
             DispatchQueue.main.sync {
@@ -95,7 +92,6 @@ public class SwiftPdfMergePlugin: NSObject, FlutterPlugin {
   class func mergeMultiplePDF(args: Dictionary<String, Any>) -> String? {
 
   do{
-            print("INDSIDE3")
             if let paths = args["paths"] as? [String], let outputDirPath = args["outputDirPath"] as? String {
 
                  guard UIGraphicsBeginPDFContextToFile(outputDirPath, CGRect.zero, nil) else {

@@ -68,7 +68,7 @@ public class PdfMergePlugin implements FlutterPlugin, MethodCallHandler {
 
         if (call.method.equals("PdfMerger")) {
             error = false;
-            final String paths = call.argument("paths");
+            // final String paths = call.argument("paths");
             final String outputDirPath = call.argument("outputDirPath");
             String[] paths_array = call.argument("paths");
 

@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 class PdfMerge {
   static const MethodChannel _channel = const MethodChannel('pdf_merge');
 
-  static Future<String> mergePDF(
+  static Future<String?> mergePDF(
       {required List<String> paths, required String outputDirPath}) async {
     // Mapping the path to <key, value>
 
@@ -13,8 +13,11 @@ class PdfMerge {
       'paths': paths,
       'outputDirPath': outputDirPath
     };
-
-    final String pdfPath = await _channel.invokeMethod('PdfMerger', params);
-    return pdfPath;
+    try {
+      final String pdfPath = await _channel.invokeMethod('PdfMerger', params);
+      return pdfPath;
+    } catch (e) {
+      return null;
+    }
   }
 }

@@ -98,7 +98,7 @@ public class PdfMergePlugin implements FlutterPlugin, MethodCallHandler {
                 e.printStackTrace();
             }
 
-            result.success(mainPath);
+            result.success(outputDirPath);
 
 
         }
